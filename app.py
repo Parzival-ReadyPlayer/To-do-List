@@ -9,26 +9,26 @@ from flask_login import LoginManager,login_user, current_user, logout_user, logi
 from dotenv import load_dotenv
 import os
 
+
+# Cargar las variables de entorno que se encuentran en .env
 load_dotenv('.env')
 
-
-
+# Instancia de la app
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 
-#para generar key, ingresar a interprete python, importar secrets, generar clave >>> secrets.token_hex(16)
+
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 db = SQLAlchemy()
-#instancia para hashear contraseñas
+
+# Instancia para hashear contraseñas
 bcrypt = Bcrypt(app)
 
 
-#CLASES PARA TABLAS
+# Clases para crear la tabla de usuarios y tareas
 
-
-#CLASES DE USUARIO
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(60), unique=True)
@@ -42,15 +42,19 @@ class Todo(db.Model):
     user_id = db.Column(db.Integer, ForeignKey('user.id'), nullable=False)
 
 #-----------------  FORMULARIOS ------------------------------
+
+# Formulario para crear tarea
 class TodoForm(FlaskForm):
     content = StringField('Tarea', validators=[DataRequired(), Length(min=2, max=144)])
     complete = BooleanField()
     submit = SubmitField('Agregar')
 
+# Actualizar tarea
 class UpdateForm(FlaskForm):
     content = StringField('Tarea', validators=[DataRequired()])
     submit = SubmitField('Actualizar')
 
+# Registro de usuarios
 class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Contraseña', validators=[DataRequired(),
@@ -61,30 +65,26 @@ class RegistrationForm(FlaskForm):
     confirm_password= PasswordField('Confirmar contraseña', validators=[DataRequired(), EqualTo('password')])
     submit= SubmitField('Registrarse')
     
+    # Funcion para validar email y que no haya dos repetidos en la base de datos
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email is taken. Please choose a different one.')
 
-
+# Inicio de sesion
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Contraseña', validators=[DataRequired()])
     submit = SubmitField('Iniciar sesion')
-    
 
 
-    
-    
-    
-
-
+# Creacion de tablas en base de datos
 
 db.init_app(app)
 with app.app_context():
     db.create_all()
     
-
+# Instancia de LoginManager
 login_manager = LoginManager()
 
 login_manager.init_app(app)
@@ -94,7 +94,6 @@ login_manager.login_message_category = 'info'
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
 
 
 
@@ -109,6 +108,8 @@ def page_not_found(error):
 def page_not_found(error):
     return render_template('500.html',error=error), 500
 
+
+
 #------------------------------    RUTAS     -------------------------------------------
 
 # Ruta para crear tarea
@@ -118,16 +119,16 @@ def page_not_found(error):
 def add():
     #formulario
     form = TodoForm()
-    #consulta para obtener todas las tareas
+    # Consulta para obtener las tareas completas e incompletas
     incomplete = Todo.query.filter_by(complete=False, user_id=current_user.id).all()
     completed = Todo.query.filter_by(complete=True, user_id=current_user.id).all()
-    #Si el formulario es valido
+    # Si el formulario es valido
     if form.validate_on_submit():
-        #crea tarea
+        # Crea tarea
         todo = Todo(text=form.content.data, complete=False, user_id= current_user.id)
-        #se agrega a base de datos
+        # Se agrega a base de datos
         db.session.add(todo)
-        #compromete los cambios
+        # Compromete los cambios
         db.session.commit()
         return redirect(url_for('add'))
     return render_template('index.html',form=form, incomplete=incomplete, completed=completed)
@@ -141,7 +142,7 @@ def edit(id):
     todo = Todo.query.get(id)
     form = UpdateForm()
     
-    # verificar que la tarea existe y pertenece al usuario loggeado
+    # Verificar que la tarea existe y pertenece al usuario loggeado, sino aborta
     if current_user.id != todo.user_id:
         abort(404)
     
@@ -167,6 +168,7 @@ def delete(id):
     return redirect(url_for('add'))
     
 # Ruta para marcar tarea completa
+
 @app.route('/completed/<int:id>', methods=['GET','POST'])
 @login_required
 def completed(id):
@@ -197,6 +199,7 @@ def incompleted(id):
 
 @app.route('/register', methods=['GET','POST'])
 def register():
+    # Si el usuario ya esta loggeado, no podra ingresar a esta ruta
     if current_user.is_authenticated:
         return redirect(url_for('add'))
     form = RegistrationForm()

@@ -5,10 +5,16 @@
 <div class="container forms">
     <div class="row justify-content-center">
         <div class="col-6">
+
+            <!-- Formulario de registro   -->
+            
             <form method="POST" action="{{url_for('register')}}" autocomplete=off>
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4 text-center">To do list! Registrate</legend>
+                    
+                    <!-- Email -->
+
                     <div class="form-group">
                         {% if form.email.errors %}
                             {{ form.email(class="form-control form-control-md is-invalid") }}
@@ -21,6 +27,9 @@
                             {{ form.email(class="form-control form-control-md mb-2", placeholder="Email") }}
                         {% endif %}
                     </div>
+
+                    <!-- Contraseña -->
+
                     <div class="form-group">
                         {% if form.password.errors %}
                             {{ form.password(class="form-control form-control-md is-invalid") }}
@@ -33,6 +42,9 @@
                             {{ form.password(class="form-control form-control-md mb-2",  placeholder="Contraseña") }}
                         {% endif %}
                     </div>
+
+                    <!-- Confirmar contraseña -->
+
                     <div class="form-group">
                         {% if form.confirm_password.errors %}
                             {{ form.confirm_password(class="form-control form-control-md is-invalid") }}
@@ -46,10 +58,14 @@
                         {% endif %}
                     </div>
                 </fieldset>
+
+                <!-- Enviar formulario -->
                 <div class="form-group text-center mb-2 d-grid gap-2 col-6 mx-auto">
                     {{ form.submit(class="btn btn-outline-success") }}
                 </div>
             </form>
+
+            <!-- Boton para iniciar sesion   -->
             <div class="border-top pt-3 text-center">
                 <small class="text-muted ">
                    <a class="btn btn-outline-info ml-2" href="{{ url_for('login') }}">Iniciar sesion</a>
