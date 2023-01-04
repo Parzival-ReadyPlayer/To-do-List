@@ -15,7 +15,7 @@ load_dotenv('.env')
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 
 #para generar key, ingresar a interprete python, importar secrets, generar clave >>> secrets.token_hex(16)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -24,11 +24,6 @@ db = SQLAlchemy()
 #instancia para hashear contraseñas
 bcrypt = Bcrypt(app)
 
-
-base =  os.getenv('SQLALCHEMY_DATABASE_URI')
-
-secret = os.getenv('SECRET_KEY')
-print(base,secret)
 
 #CLASES PARA TABLAS
 
