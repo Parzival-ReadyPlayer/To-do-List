@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <div class="container forms">
+        <div class="row justify-content-center">
+            <div class="col-6 ">
+                <form method="POST" action="{{ url_for('login') }}" autocomplete=off>
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4 text-center">Inicia sesion para crear tu lista de tareas!</legend>
+                        <div class="form-group">
+                            {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control-md is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.email(class="form-control form-control-md mb-2", placeholder="Email") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group mb-2">
+                            {% if form.password.errors %}
+                                {{ form.password(class="form-control form-control-md is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.password(class="form-control form-control-md", placeholder="Contraseña") }}
+                            {% endif %}
+                        </div>
+                        
+                    </fieldset>
+                    <div class="form-group text-center mb-2 d-grid gap-2 col-6 mx-auto">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                   
+                </form>
+
+                <div class="border-top pt-3 text-center">
+                    <small class="text-muted">
+                       <a class="btn btn-outline-success ml-2" href="{{ url_for('register') }}">Registrate!</a>
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+{% endblock content %}

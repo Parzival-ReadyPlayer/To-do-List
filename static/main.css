@@ -1,0 +1,67 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: rgb(17, 22, 26);
+}
+
+.main{
+    width: 50%;
+    max-width: 1000px;
+    border: 1px solid #dfe7f1;
+    margin: auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr ;
+    background:#f1f7fc;
+    box-shadow:1px 1px 5px rgba(0,0,0,0.1);
+    border-radius:4px;
+}
+
+.forms{
+    width: 50%;
+    max-width: 1000px;
+    border: 1px solid #dfe7f1;
+    margin: auto;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr ;
+    background:#f1f7fc;
+    
+    box-shadow:1px 1px 5px rgba(0,0,0,0.1);
+    border-radius:4px;
+}
+
+ul{
+    list-style: none;/*Para quitar los puntos de items*/
+}
+
+svg{
+    height: 15px;
+    width: 15px;
+}
+
+#Layer_1{
+    height: 20px;
+    width: 20px;
+}
+
+a {
+    padding-left: 25px;
+}
+
+
+.inline{
+    display: inline-block;
+}
+
+
+.text{
+   word-break: break-word;
+}
+
+input {
+    border-radius: 4px;
+}

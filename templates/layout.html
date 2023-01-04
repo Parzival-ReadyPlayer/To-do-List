@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do list</title>
+    <link rel="stylesheet" href="../static/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+</head>
+<body>
+
+    <div class="navbar-nav text-end">
+        {% if current_user.is_authenticated %}
+          <a class="nav-item nav-link" href="{{ url_for('logout') }}">
+            <!-- icono cerrar sesion --><svg id="Capa_1" enable-background="new 0 0 520.107 520.107" viewBox="0 0 520.107 520.107" xmlns="http://www.w3.org/2000/svg"><g><g id="图层_x0020_1_00000010281827516815622430000010793570049540632231_"><g id="_211341816"><g id="_211341480"><path d="m260.463 520.107c-20.927 0-41.989-2.751-62.745-8.313-62.15-16.653-114.09-56.504-146.25-112.211-32.161-55.705-40.702-120.608-24.049-182.757s56.504-114.088 112.21-146.248c8.86-5.115 20.19-2.079 25.307 6.781 5.115 8.862 2.079 20.192-6.782 25.307-47.135 27.211-80.855 71.16-94.947 123.749-14.091 52.589-6.865 107.508 20.348 154.642 27.213 47.137 71.162 80.856 123.752 94.948 52.591 14.091 107.511 6.865 154.645-20.35 47.137-27.211 80.856-71.159 94.948-123.749 14.091-52.588 6.865-107.508-20.35-154.644-17.867-30.949-43.662-56.749-74.594-74.612-8.86-5.116-11.896-16.446-6.779-25.307 5.117-8.859 16.446-11.896 25.306-6.778 36.559 21.11 67.041 51.599 88.155 88.172 32.162 55.706 40.702 120.611 24.05 182.759s-56.504 114.087-112.211 146.247c-37.099 21.422-78.284 32.364-120.014 32.364z" fill="rgb(0,0,0)"/></g><g id="_211341072"><path clip-rule="evenodd" d="m241.526 273.772v-230.962-19.149-5.137c0-10.188 8.336-18.524 18.527-18.524 10.191 0 18.528 8.375 18.528 18.523v5.137 19.15 230.962c0 9.995-8.336 18.523-18.528 18.523-10.191 0-18.527-8.336-18.527-18.523z" fill="rgb(0,0,0)" fill-rule="evenodd"/></g></g></g></g></svg>
+            Cerrar sesion</a>
+        {% endif %}
+      </div>
+    {% block content %}
+      
+    {% endblock content %}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>

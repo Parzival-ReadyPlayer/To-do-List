@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <main class="main">
+            <header class="header text-center">
+                <h2>Editar tarea</h2>
+            </header>
+                <form method='POST' action="{{ url_for('edit', id=todo.id) }}" autocomplete=off>
+                    {{ form.hidden_tag() }}
+                    {{ form.content (class="form-control form-control-md pb-3 mt-2 mb-2")}}
+
+                    <input type="submit" value="Guardar cambios" class="btn btn-info btn-md mb-2"> 
+                </form>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock content %}
