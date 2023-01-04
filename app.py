@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, PasswordField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager,login_user, current_user, logout_user, login_required, UserMixin
 from dotenv import load_dotenv
@@ -53,7 +53,11 @@ class UpdateForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Contraseña', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired(),
+                                                       Regexp(
+            r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$',
+            message='La contraseña debe tener al menos 6 caracteres y contener al menos una letra mayúscula, una minúscula, un símbolo y un número'
+        )])
     confirm_password= PasswordField('Confirmar contraseña', validators=[DataRequired(), EqualTo('password')])
     submit= SubmitField('Registrarse')
     
