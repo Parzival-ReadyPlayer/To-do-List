@@ -52,9 +52,7 @@ Este comando va a crear una carpeta dentro de todolist, con todos los archivos d
 
     pip install -r requirements.txt
     
-9º Corre la aplicacion
 
-    python app.py
     
 
 
