@@ -58,7 +58,7 @@ Este comando va a crear una carpeta dentro de todolist, con todos los archivos d
 variables de entorno deben estar en un archivo .env en la carpeta de la aplicacion to-do-list, este archivo se ignora al subirse al servidor mediante
 el archivo .gitignore por cuestiones de seguridad.
 
-Entonces, para correr la app, abri la carpeta to-do-list en tu editor de codigo
+Entonces, abri la carpeta to-do-list en tu editor de codigo
 
 9)a)Crear archivo .env y dentro establece las variables de entorno
         
