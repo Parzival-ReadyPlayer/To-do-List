@@ -30,7 +30,7 @@ Windows
     
     . env\Scripts\activate
 
-NOTA IMPORTANTE(WINDOWS): Si te surge un error de seguridad como me paso a mi, asegurate de estar ejecutando Powershell como administrador,
+NOTA IMPORTANTE(WINDOWS) : Si te surge un error de seguridad como me paso a mi, asegurate de estar ejecutando Powershell como administrador,
 si el error persiste te recomiendo ejecutar este comando y dale que si cuando te pregunte.
                 
     Set-ExecutionPolicy -ExecutionPolicy Unrestricted
@@ -60,7 +60,7 @@ el archivo .gitignore por cuestiones de seguridad.
 
 Entonces, para correr la app, abri la carpeta to-do-list en tu editor de codigo
 
-        Crear archivo .env y dentro establece las variables de entorno
+9)a)Crear archivo .env y dentro establece las variables de entorno
         
         SECRET_KEY=1634ff3506760f9677ea258cfb32deb8a35d6e21049d12f4f42b8f9bd7bb53e5
         SQLALCHEMY_DATABASE_URI=sqlite:////todo.db
@@ -68,18 +68,18 @@ Entonces, para correr la app, abri la carpeta to-do-list en tu editor de codigo
 
 El directorio deberia tener esta forma o similar
 
-│   .env
-│   .gitignore
-│   app.py
-│   Procfile
-│   README.md
-│   requirements.txt
-│
-├───instance
-│       
-├───static
-│       
-└───templates
+        │   .env
+        │   .gitignore
+        │   app.py
+        │   Procfile
+        │   README.md
+        │   requirements.txt
+        │
+        ├───instance
+        │       
+        ├───static
+        │       
+        └───templates
        
 10º Ultimo paso, volve a tu terminal, fijate que estes ubicado correctamente, con tu entorno virtual activado
 
